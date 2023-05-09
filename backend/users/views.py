@@ -4,10 +4,13 @@ from rest_framework.response import Response
 
 from .serializers import UserSerializer
 from .models import User
+from .permissions import IsAdminUser
 
 
 class UserListView(APIView):
     serializer_class = UserSerializer
+    authentication_classes = [authentication.SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
     
     def get(self, request, *args, **kwargs):
         queryset = User.objects.all()
@@ -18,3 +21,5 @@ class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     lookup_field = 'pk'
+    authentication_classes = [authentication.SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
