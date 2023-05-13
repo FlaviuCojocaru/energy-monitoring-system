@@ -8,8 +8,6 @@ from .permissions import IsAdminUser
 
 
 class UserListCreateView(APIView):
-    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
-    
     def get(self, request, *args, **kwargs):
         queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)
@@ -26,5 +24,4 @@ class UserListCreateView(APIView):
 class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    lookup_field = 'pk'
-    permission_classes = [permissions.IsAuthenticated, IsAdminUser]    
+    lookup_field = 'pk'    
