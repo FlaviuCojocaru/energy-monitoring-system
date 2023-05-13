@@ -12,12 +12,6 @@ class BaseUserSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length=150, required=False)
     consumer_number = serializers.CharField(max_length=10, required=False)
 
-    def is_client(self, instance):
-        return instance.role.name == Role.CLIENT
-
-    def is_admin(self, instance):
-        return instance.role.name == Role.ADMINISTRATOR
-
     # validators
     def validate_role(self, value):
         """
@@ -63,8 +57,6 @@ class UserSerializer(BaseUserSerializer):
         client_instance = None
 
         for prop, value in validated_data.items():
-            print(f"{prop}:{value}")
-
             if prop == 'role':
                 if value.upper() == Role.CLIENT:
                     # if the new value for 'role' is "CLIENT"
@@ -81,7 +73,7 @@ class UserSerializer(BaseUserSerializer):
                 # set the value with the model instance of the role
                 value = Role.objects.get(name=value.upper())
 
-            if self.is_client(instance) and prop == 'consumer_number':
+            if instance.is_client() and prop == 'consumer_number':
                 if not client_instance:
                     client_instance = Client.objects.get(user=instance)
                 setattr(client_instance, prop, value)
@@ -96,10 +88,10 @@ class UserSerializer(BaseUserSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
-        if self.is_admin(instance):
+        if instance.is_admin():
             representation.pop('consumer_number', None)
 
-        if self.is_client(instance):
+        if instance.is_client():
             representation['consumer_number'] = Client.objects.get(
                 user=instance).consumer_number
 

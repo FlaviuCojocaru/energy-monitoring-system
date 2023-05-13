@@ -25,5 +25,11 @@ class Client(models.Model):
 class User(AbstractUser):
     role = models.ForeignKey(Role, on_delete=models.CASCADE, null=True)
     
+    def is_client(self):
+        return self.role.name == Role.CLIENT
+
+    def is_admin(self):
+        return self.role.name == Role.ADMINISTRATOR
+    
     def __str__(self):
         return self.username
