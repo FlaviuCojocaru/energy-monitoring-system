@@ -1,0 +1,40 @@
+.header {
+  font-size: 17px;
+  padding: 5px 6%;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  z-index: 100;
+}
+
+.delos-logo {
+  height: 65px;
+  cursor: pointer;
+}
+
+.nav-items {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-items li {
+  margin: 0 20px;
+  padding: 0px 5px 5px 5px;
+  cursor: pointer;
+  transition: opacity 0.33s;
+}
+
+.nav-items li:hover {
+  opacity: 0.4;
+}
+
+.active-item {
+  border-bottom: 2px solid #28282b;
+}
