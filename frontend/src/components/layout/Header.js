@@ -13,7 +13,7 @@ function Header() {
         <nav >
           <ul className="nav-items">
             <li>
-              <Link>Register</Link>
+              <Link to={"/register"}>Register</Link>
             </li>
             <li>
               <Link to={"/login"}>Login</Link>
