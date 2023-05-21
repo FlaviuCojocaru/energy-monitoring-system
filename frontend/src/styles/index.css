@@ -2,8 +2,16 @@
 
 body {
   margin: 0;
+  margin-bottom: 350px;
   font-family: "Lato", sans-serif;
   color: #28282b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
 }

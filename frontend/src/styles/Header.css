@@ -9,6 +9,8 @@
   position: fixed;
   left: 0px;
   right: 0px;
+  top: 0;
+  max-height: 65px;
   z-index: 100;
 }
 
@@ -29,6 +31,11 @@
   padding: 0px 5px 5px 5px;
   cursor: pointer;
   transition: opacity 0.33s;
+}
+
+.nav-items li a{
+  color: #28282b;
+  text-decoration: none;
 }
 
 .nav-items li:hover {

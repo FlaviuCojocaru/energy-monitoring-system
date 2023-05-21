@@ -1,27 +1,47 @@
 .slogan-section {
   padding-top: 65px;
-  height: 400px;
-  background-color: #f3f3f3;
+  height: 600px;
+  /* background-color: #f3f3f3; */
+  background: none;
   /* line-height: 250px; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+}
+
+.background-color{
+  position: absolute;
+  background-color: #f3f3f3;
+  height: 665px;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.background-image {
+  position: absolute;
+  bottom: 16px;
+  height: 50%;
+  scale: 110%
 }
 
 .first-row {
   margin: 0px;
   font-size: 40px;
   font-weight: 700;
-  text-align: center;
+  position: absolute;
+  bottom: 450px;
 }
 
 .second-row {
   margin: 0px;
   font-size: 35px;
-  text-align: center;
   font-style: italic;
   width: 400;
+  position: absolute;
+  bottom: 410px;
 }
 
 .feature-section {
