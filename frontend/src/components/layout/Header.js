@@ -7,10 +7,12 @@ function Header() {
   return (
     <div className="header">
       <div className="left-section">
-        <Logo className="delos-logo" />
+        <Link to={"/"}>
+          <Logo className="delos-logo" />
+        </Link>
       </div>
       <div className>
-        <nav >
+        <nav>
           <ul className="nav-items">
             <li>
               <Link to={"/register"}>Register</Link>
