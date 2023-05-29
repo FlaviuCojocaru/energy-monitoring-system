@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import "../../styles/Header.css";
 import { ReactComponent as Logo } from "../../images/logo.svg";
 import { Link } from "react-router-dom";
@@ -11,7 +10,7 @@ function Header() {
           <Logo className="delos-logo" />
         </Link>
       </div>
-      <div className>
+      <div>
         <nav>
           <ul className="nav-items">
             <li>

@@ -1,16 +1,14 @@
+import { useSelector } from "react-redux";
+import HomeSection from "./HomeSection";
 import { Fragment } from "react";
-import "../../styles/home.css";
-import Slogan from "./Slogan";
-import Features from "./Features";
+import { selectAuthTokens } from "../../features/auth/authSlice";
+import UserHomeSection from "./UserHomeSection";
 
-function HomeSection() {
+function Home() {
+  const authTokens = useSelector(selectAuthTokens);
   return (
-    <Fragment>
-      <div className="background-color"></div>
-      <Slogan />
-      <Features />
-    </Fragment>
+    <Fragment>{authTokens ? <UserHomeSection /> : <HomeSection />}</Fragment>
   );
 }
 
-export default HomeSection;
+export default Home;
