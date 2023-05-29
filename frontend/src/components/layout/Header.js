@@ -15,7 +15,6 @@ function Header() {
     dispatch(reset());
   };
 
-  // userLinks = <p>Logout</p>
   const default_links = (
     <nav>
       <ul className="nav-items">

@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:8000/user-management/login";
+const LOGIN_URL = "http://127.0.0.1:8000/user-management/login";
+const REGISTER_URL = "http://127.0.0.1:8000/user-management/users";
 
 // login user
 const login = async (userData) => {
-  const response = await axios.post(API_URL, userData, {
+  const response = await axios.post(LOGIN_URL, userData, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -23,9 +24,19 @@ const logout = async () => {
   localStorage.removeItem("authTokens");
 };
 
+// register user
+const register = async (userData) => {
+  await axios.post(REGISTER_URL, userData, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 const authService = {
   login,
   logout,
+  register,
 };
 
 export default authService;

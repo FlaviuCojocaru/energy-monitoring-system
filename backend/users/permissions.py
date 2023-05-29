@@ -19,5 +19,17 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method == 'GET':
             return True
-        
+
+        return request.user.role.name == Role.ADMINISTRATOR
+
+
+class IsAdminOrCreateOnly(permissions.BasePermission):
+    """
+    Permission class that allows all requests made by an admin user and only post requests mede by an unauthorised user.
+    """
+
+    def has_permission(self, request, view):
+        if request.method == 'POST':
+            return True
+
         return request.user.role.name == Role.ADMINISTRATOR

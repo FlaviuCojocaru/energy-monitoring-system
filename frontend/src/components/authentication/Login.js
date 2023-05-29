@@ -4,13 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import {
-  login,
-  reset,
-  selectAuthInfo,
-} from "../../features/auth/authSlice";
+import { login, reset, selectAuthInfo } from "../../features/auth/authSlice";
 import "../../styles/authentication.css";
-import { SUCCEEDED, FAILED } from "../../utils/status";
+import { SUCCEEDED, FAILED, IDLE, LOADING } from "../../utils/status";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -34,7 +30,9 @@ function Login() {
       navigate("/");
     }
 
-    dispatch(reset());
+    if (status !== IDLE && status !== LOADING) {
+      dispatch(reset());
+    }
   }, [authTokens, status, message, navigate, dispatch]);
 
   const onChange = (e) => {
