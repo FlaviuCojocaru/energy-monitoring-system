@@ -59,7 +59,7 @@ function Login() {
     <div className="auth-form login">
       <h1>Login</h1>
       <form onSubmit={onSubmit}>
-        <div class="auth-item">
+        <div className="auth-item">
           <input
             type="text"
             required
@@ -72,7 +72,7 @@ function Login() {
           <label>Username</label>
         </div>
 
-        <div class="auth-item">
+        <div className="auth-item">
           <input
             type="password"
             required

@@ -2,13 +2,13 @@ import axios from "axios";
 
 const API_URL = "http://127.0.0.1:8000/user-management/login";
 
-//login user
+// login user
 const login = async (userData) => {
   const response = await axios.post(API_URL, userData, {
     headers: {
       "Content-Type": "application/json",
     },
-  });   
+  });
 
   if (response.data) {
     // save the tokens in the local storage
@@ -18,8 +18,14 @@ const login = async (userData) => {
   return response.data;
 };
 
+// logout user
+const logout = async () => {
+  localStorage.removeItem("authTokens");
+};
+
 const authService = {
   login,
+  logout,
 };
 
 export default authService;

@@ -28,6 +28,11 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
+// logout user
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await authService.logout();
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -49,6 +54,9 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.status = FAILED;
         state.message = action.payload;
+        state.authTokens = null;
+      })
+      .addCase(logout.fulfilled, (state) => {
         state.authTokens = null;
       });
   },
