@@ -27,21 +27,62 @@
 }
 
 .nav-items li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-left: 20px;
+  height: 70px;
   cursor: pointer;
-  transition: opacity 0.33s;
+  transition: opacity 0.25s;
 }
 
 .nav-items li a{
-  margin: 0 20px;
-  padding: 10px 10px 10px 10px;
+  padding: 30px 10px 30px 30px;
   color: #28282b;
   text-decoration: none;
 }
 
-.nav-items li:hover {
-  opacity: 0.4;
+.nav-items .header-link:hover {
+  opacity: 0.5;
 }
 
 .active-item {
   border-bottom: 2px solid #28282b;
 }
+
+.header-icon{
+  height: 22px;
+  width: 22px;
+  margin-right: -30px;
+}
+
+.header-btn button{
+  padding: 10px 10px 10px 10px;
+  margin-left: 20px;
+
+  background-color: #28272b;
+  border: 1px solid #28272b;
+  border-radius: 5px;
+  color: #f3f3f3;
+  font-size: 17px;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+
+  cursor: pointer;
+  transition: opacity 0.25s;
+}
+
+.header-btn button .header-icon{
+  height: 17px;
+  width: 17px;
+  margin: 0;
+}
+
+.header-btn button:hover {
+  opacity: 0.75;
+}
+

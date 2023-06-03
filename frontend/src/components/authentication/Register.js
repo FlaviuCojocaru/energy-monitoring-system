@@ -67,7 +67,7 @@ const Register = () => {
   return (
     <div className="auth-form register">
       <div className="register-header">
-        <h1>Sign Up</h1>
+        <h1>Register</h1>
         <p>It's quick and easy.</p>
       </div>
       <form onSubmit={onSubmit}>

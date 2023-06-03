@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import jwt_decode from "jwt-decode";
+
 import authService from "./authService";
 import { IDLE, LOADING, SUCCEEDED, FAILED } from "../../utils/status";
 
@@ -6,6 +8,7 @@ const authTokens = JSON.parse(localStorage.getItem("authTokens"));
 
 const initialState = {
   authTokens: authTokens ? authTokens : null,
+  role: authTokens ? jwt_decode(authTokens.access).role : null,
   status: IDLE,
   message: "",
 };
@@ -39,11 +42,11 @@ export const register = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       await authService.register(user);
-      const credentials = {username:user.username, password:user.password}
-      return await authService.login(credentials)
+      const credentials = { username: user.username, password: user.password };
+      return await authService.login(credentials);
     } catch (error) {
-
-      const message = error.response && error.response.data && error.response.data ;
+      const message =
+        error.response && error.response.data && error.response.data;
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -66,6 +69,7 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.status = SUCCEEDED;
         state.authTokens = action.payload;
+        state.role = jwt_decode(action.payload.access).role;
       })
       .addCase(login.rejected, (state, action) => {
         state.status = FAILED;
@@ -74,6 +78,7 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.authTokens = null;
+        state.role = null;
       })
       .addCase(register.pending, (state) => {
         state.status = LOADING;
@@ -81,6 +86,7 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.status = SUCCEEDED;
         state.authTokens = action.payload;
+        state.role = jwt_decode(action.payload.access).role;
       })
       .addCase(register.rejected, (state, action) => {
         state.status = FAILED;
@@ -91,6 +97,7 @@ export const authSlice = createSlice({
 });
 
 export const selectAuthTokens = (state) => state.auth.authTokens;
+export const selectAuthRole = (state) => state.auth.role;
 export const selectAuthInfo = (state) => state.auth;
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;

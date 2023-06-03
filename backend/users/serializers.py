@@ -1,3 +1,4 @@
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from .models import Client, Role, User
 
@@ -122,3 +123,13 @@ class CreateUserSerializer(BaseUserSerializer):
             client_instance.save()  # save the client instance in the db
 
         return instance
+    
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['role'] = user.role.name
+
+        return token

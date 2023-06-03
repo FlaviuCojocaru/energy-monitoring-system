@@ -19,7 +19,7 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { authTokens, status, message } = useSelector(selectAuthInfo);
+  const { authTokens, role, status, message } = useSelector(selectAuthInfo);
 
   useEffect(() => {
     if (status === FAILED) {
