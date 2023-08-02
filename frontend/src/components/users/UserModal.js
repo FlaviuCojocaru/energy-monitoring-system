@@ -18,6 +18,7 @@ function UserModal({ isOpen, onClose }) {
   const roles = { client: "Client", admin: "Administrator" };
 
   const [isClient, setIsClient] = useState(true);
+  const [isCreated, setIsCreated] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -58,8 +59,9 @@ function UserModal({ isOpen, onClose }) {
       }
     }
 
-    if (status === SUCCEEDED) {
+    if (status === SUCCEEDED && isCreated) {
       toast.success("User created successfully");
+      setIsCreated(false);
     }
 
     if (status !== IDLE && status !== LOADING) {
@@ -83,7 +85,7 @@ function UserModal({ isOpen, onClose }) {
 
     let userData = {
       id: users[users.length - 1].id + 1, // get the last id and add 1
-      username: username,
+      username,
       password,
       email,
       first_name: firstName,
@@ -95,8 +97,9 @@ function UserModal({ isOpen, onClose }) {
       userData = { ...userData, consumer_number: consumerNumber };
     }
 
-    console.log(userData);
     dispatch(createUser(userData));
+    console.log('Created');
+    setIsCreated(true);
     onClose(); // close the modal
     clearForm(); // clear the form
   };

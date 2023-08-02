@@ -7,6 +7,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  padding-bottom: 50%;
 }
 .dashboard-info .top {
   margin-bottom: 50px;

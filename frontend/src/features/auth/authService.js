@@ -31,6 +31,10 @@ const register = async (userData) => {
       "Content-Type": "application/json",
     },
   });
+
+  // add today for the created_date atribute
+  userData['created_date'] = new Date().toISOString().split('T')[0];
+  return userData;
 };
 
 const authService = {

@@ -27,8 +27,7 @@ export const createUser = createAsyncThunk(
   "users/createUsers",
   async (user, thunkAPI) => {
     try {
-      await authService.register(user);
-      return user
+      return await authService.register(user);
     } catch (error) {
       // let message = "There was an error!";
       const message = error.response && error.response.data && error.response.data;
