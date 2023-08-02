@@ -54,41 +54,43 @@ function Login() {
   };
 
   return (
-    <div className="auth-form login">
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
-        <div className="auth-item">
-          <input
-            type="text"
-            required
-            placeholder=" "
-            name="username"
-            value={username}
-            onChange={onChange}
-          ></input>
-          <span></span>
-          <label>Username</label>
-        </div>
+    <div className="container-auth">
+      <div className="auth-form login">
+        <h1>Login</h1>
+        <form onSubmit={onSubmit}>
+          <div className="auth-item">
+            <input
+              type="text"
+              required
+              placeholder=" "
+              name="username"
+              value={username}
+              onChange={onChange}
+            ></input>
+            <span></span>
+            <label>Username</label>
+          </div>
 
-        <div className="auth-item">
-          <input
-            type="password"
-            required
-            placeholder=" "
-            name="password"
-            value={password}
-            onChange={onChange}
-          ></input>
-          <span></span>
-          <label>Password</label>
-        </div>
+          <div className="auth-item">
+            <input
+              type="password"
+              required
+              placeholder=" "
+              name="password"
+              value={password}
+              onChange={onChange}
+            ></input>
+            <span></span>
+            <label>Password</label>
+          </div>
 
-        <button type="submit">Login</button>
+          <button type="submit">Login</button>
 
-        <div className="redirect-link">
-          Don't have an account? <Link to={"/register"}>Register</Link>
-        </div>
-      </form>
+          <div className="redirect-link">
+            Don't have an account? <Link to={"/register"}>Register</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

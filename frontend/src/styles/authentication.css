@@ -1,25 +1,29 @@
-.auth-form {
-  margin-top: 200px;
+.container-auth {
+  display: flex;
+  justify-content: center;
+  /* background-color: red; */
+}
 
+.auth-form {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  
+
   border: 2px solid #dbd9d9;
   color: #28282b;
 }
 
-.login{
-  margin-bottom: -40px;
+.login {
   width: 375px;
   border-radius: 45px;
+  margin-top: 10%;
 }
 
-.register{
+.register {
   width: 500px;
   border-radius: 60px;
-  margin-top: 150px;
-
+  margin-top: 5%;
+  margin-bottom: 10%;
 }
 
 .login h1 {
@@ -32,7 +36,7 @@
   text-align: center;
 }
 
-.register-header{
+.register-header {
   padding: 0 0 20px 0;
   margin-bottom: 40px;
 
@@ -41,13 +45,13 @@
   text-align: center;
 }
 
-.register-header h1{
+.register-header h1 {
   margin-top: 35px;
   margin-bottom: 5px;
   font-size: 30px;
 }
 
-.register-header p{
+.register-header p {
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 16px;
@@ -64,7 +68,7 @@ form .auth-item {
   position: relative;
   border-bottom: 2px solid #dbd9d9;
   margin-bottom: 30px;
-  }
+}
 
 .auth-item input {
   width: 100%;
@@ -76,8 +80,8 @@ form .auth-item {
   outline: none;
 }
 
-.register-item input{
-  width: 250px
+.register-item input {
+  width: 250px;
 }
 
 .auth-item label {
@@ -103,13 +107,13 @@ form .auth-item {
 }
 
 .auth-item input:focus ~ label,
-.auth-item input:not(:placeholder-shown) ~ label{
+.auth-item input:not(:placeholder-shown) ~ label {
   top: -5px;
   color: #28282b;
 }
 
 .auth-item input:focus ~ span::before,
-.auth-item input:not(:placeholder-shown) ~ span::before{
+.auth-item input:not(:placeholder-shown) ~ span::before {
   width: 100%;
 }
 
@@ -130,7 +134,6 @@ form .auth-item {
 }
 
 .auth-form button:hover {
-  /* border: 5px solid #28282b; */
   opacity: 0.8;
 }
 

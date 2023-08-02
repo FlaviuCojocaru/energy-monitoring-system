@@ -1,18 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap");
 
 body {
-  margin: 0;
-  margin-bottom: 350px;
   font-family: "Lato", sans-serif;
-  color: #28282b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
 }
 
 html {
+  background-color: white;
+  min-height:100vh;
   position: relative;
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }

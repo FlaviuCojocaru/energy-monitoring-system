@@ -6,7 +6,6 @@ import Features from "./Features";
 function HomeSection() {
   return (
     <Fragment>
-      <div className="background-color"></div>
       <Slogan />
       <Features />
     </Fragment>

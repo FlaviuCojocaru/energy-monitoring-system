@@ -14,8 +14,10 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import PrivateRoute from "./components/utils/PrivateRoute";
+
 import { Fragment } from "react";
+import AdminRoute from "./components/utils/AdminRoute";
+import UserManagementDashboard from "./components/users/UserManagementDashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +25,12 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      {/* private routes for the admin users */}
+      <Route path="/" element={<AdminRoute />}>
+        <Route path="/users" element={<UserManagementDashboard />} />
+      </Route>
+
     </Route>
   )
 );

@@ -56,7 +56,7 @@ function Header() {
     <ul className="nav-items">
       <li className="header-link">
         <UsersIcon className="header-icon" />
-        <Link to={"/clients"}>Clients</Link>
+        <Link to={"/users"}>Users</Link>
       </li>
       <li className="header-link">
         <DevicesIcon className="header-icon" />
