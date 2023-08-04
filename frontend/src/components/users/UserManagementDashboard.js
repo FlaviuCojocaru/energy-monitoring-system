@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import UserTable from "./UserTable";
 import UserDashboardInfo from "./UserDashboardInfo";
-import { useDispatch, useSelector } from "react-redux";
 import { selectAuthTokens } from "../../features/auth/authSlice";
 import { getUsers } from "../../features/users/usersSlice";
 import UserModal from "./UserModal";

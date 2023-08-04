@@ -18,6 +18,11 @@ function UserTable() {
   }, []);
   const [isOpen, setIsOpen] = useState(initialState)
 
+  // useEffect(() => {
+  //   console.log("in table: ");
+  //   console.log(users);
+  // }, [users])
+
   const handleOnOpen = (id, e) => {
     setIsOpen({...initialState, [id]:true})
   };
@@ -57,9 +62,8 @@ function UserTable() {
                   className="edit-icon"
                   onClick={(e) => handleOnOpen(user.id, e)}
                 />
-                {isOpen[user.id] && <UserMenu onClose={handleOnClose}/>}
+                {isOpen[user.id] && <UserMenu currentUserId={user.id} onClose={handleOnClose}/>}
               </td>
-              {/* <UserMenu /> */}
             </tr>
           );
         })}

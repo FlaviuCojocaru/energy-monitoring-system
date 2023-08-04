@@ -84,7 +84,6 @@ function UserModal({ isOpen, onClose }) {
     e.preventDefault();
 
     let userData = {
-      id: users[users.length - 1].id + 1, // get the last id and add 1
       username,
       password,
       email,
@@ -98,7 +97,6 @@ function UserModal({ isOpen, onClose }) {
     }
 
     dispatch(createUser(userData));
-    console.log('Created');
     setIsCreated(true);
     onClose(); // close the modal
     clearForm(); // clear the form
