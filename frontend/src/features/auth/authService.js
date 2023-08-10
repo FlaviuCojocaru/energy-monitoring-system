@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const LOGIN_URL = "http://127.0.0.1:8000/user-management/login";
-const REGISTER_URL = "http://127.0.0.1:8000/user-management/users";
+const BASE_URL = "http://127.0.0.1:8000/user-management";
 
 // login user
 const login = async (userData) => {
-  const response = await axios.post(LOGIN_URL, userData, {
+  const url = `${BASE_URL}/login`;
+  const response = await axios.post(url, userData, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -26,15 +26,13 @@ const logout = async () => {
 
 // register user
 const register = async (userData) => {
-  await axios.post(REGISTER_URL, userData, {
+  const url = `${BASE_URL}/users`;
+  const response = await axios.post(url, userData, {
     headers: {
       "Content-Type": "application/json",
     },
   });
-
-  // add today for the created_date atribute
-  userData['created_date'] = new Date().toISOString().split('T')[0];
-  return userData;
+  return response.data;
 };
 
 const authService = {

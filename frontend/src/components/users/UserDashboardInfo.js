@@ -1,12 +1,12 @@
-import { ReactComponent as AddUserIcon } from "../../images/add-user-icon.svg";
-import { ReactComponent as SearchIcon } from "../../images/search-icon.svg";
 import { useEffect, useState } from "react";
+
+import { ReactComponent as AddUserIcon } from "../../images/add-user-icon.svg";
 import { selectUsers } from "../../features/users/usersSlice";
 import { useSelector } from "react-redux";
 import "../../styles/dashboard.css";
 
 function UserDashboardInfo(props) {
-  const users = useSelector(selectUsers);
+  const {users} = useSelector(selectUsers);
   const [num_users, set_num_users] = useState(users.length);
 
   useEffect(() => {

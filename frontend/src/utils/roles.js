@@ -1,2 +1,1 @@
-export const CLIENT = "CLIENT";
-export const ADMIN = "ADMINISTRATOR";
+export const roles = { client: "CLIENT", admin: "ADMINISTRATOR" };

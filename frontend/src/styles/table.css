@@ -1,0 +1,127 @@
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 15px;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: #28272b;
+  color: white;
+  text-align: left;
+  font-weight: 700;
+}
+
+.content-table th {
+  padding: 15px 10px;
+}
+
+.content-table td {
+  padding: 10px 10px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dbd9d9;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: #f8f7f7;
+}
+
+.content-table input {
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  height: 25px;
+  width: 200px;
+}
+
+.content-table tbody .menu-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.edit-cell {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.edit-cell .cancel-icon {
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  margin-right: 7px;
+}
+
+.edit-cell .save-icon {
+  height: 23px;
+  width: 23px;
+  cursor: pointer;
+  margin-left: 7px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info .profile-icon {
+  height: 55px;
+  width: 55px;
+  margin: 0;
+}
+
+.user-info .info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+  gap: 5px;
+}
+
+.user-info .info-content h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.user-info .info-content span {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(135, 135, 135);
+}
+
+.user-info .first-row {
+  margin: 0;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.user-info input {
+  width: 100px;
+}
+
+.content-table tbody tr {
+  position: relative;
+}
+
+.sequence-number {
+  padding: 5px;
+
+  background-color: #ededee;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+}
+
+.content-table .sequence-number-edit {
+  width: 100px;
+}

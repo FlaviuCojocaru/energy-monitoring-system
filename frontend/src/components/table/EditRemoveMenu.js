@@ -1,6 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useEffect } from "react";
 
 import {
   deleteUser,
@@ -10,33 +8,40 @@ import {
 import { ReactComponent as EditIcon } from "../../images/edit-icon.svg";
 import { ReactComponent as RemoveIcon } from "../../images/remove-icon.svg";
 import { selectAuthTokens } from "../../features/auth/authSlice";
-import { FAILED, IDLE, LOADING, SUCCEEDED } from "../../utils/status";
 import "../../styles/dashboard.css";
 
-function UserMenu({ currentUserId, onClose }) {
+function EditRemoveMenu({ row, table, onClose }) {
+  const meta = table.options.meta;
+  const id = row.original.id;
+  const authTokens = useSelector(selectAuthTokens);
   const dispatch = useDispatch();
 
-  const authTokens = useSelector(selectAuthTokens);
-  const { users, status, message } = useSelector(selectUsersInfo);
-
-  const handleRemove = (e) => {
-    dispatch(deleteUser({ userId: currentUserId, tokens: authTokens }));
+  const setEditedRows = () => {
+    meta?.setEditedRows((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
-  const handleEdit = (e) => {
-    console.log("edit");
+  const handleRemove = (e) => {
+    dispatch(deleteUser({ userId: id, tokens: authTokens }));
+  };
+
+  const handleEnableEdit = (e) => {
+    setEditedRows(); // set the row in edit mode
+    onClose(); // close the EditRemoveMenu component
   };
 
   return (
     <>
       <div onClick={onClose} className="overlay-menu"></div>
-      <div className="dashboard-menu">
-        <div onClick={handleEdit}>
-          <EditIcon className="dashboard-menu-icon" />
+      <div className="table-menu">
+        <div onClick={handleEnableEdit}>
+          <EditIcon className="table-menu-icon" />
           <span>Edit User</span>
         </div>
         <div onClick={handleRemove}>
-          <RemoveIcon className="dashboard-menu-icon" />
+          <RemoveIcon className="table-menu-icon" />
           <span>Remove</span>
         </div>
       </div>
@@ -44,4 +49,4 @@ function UserMenu({ currentUserId, onClose }) {
   );
 }
 
-export default UserMenu;
+export default EditRemoveMenu;

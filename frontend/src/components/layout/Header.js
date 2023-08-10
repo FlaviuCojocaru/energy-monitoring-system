@@ -13,8 +13,8 @@ import { ReactComponent as DevicesIcon } from "../../images/devices-icon.svg";
 import { ReactComponent as UsersIcon } from "../../images/users-icon.svg";
 import { ReactComponent as SensorsIcon } from "../../images/sensors-icon.svg";
 import { ReactComponent as LogoutIcon } from "../../images/logout-icon.svg";
-import { ADMIN } from "../../utils/roles";
-import "../../styles/Header.css";
+import {roles} from "../../utils/roles";
+import "../../styles/header.css";
 
 function Header() {
   const tokens = useSelector(selectAuthTokens);
@@ -83,7 +83,7 @@ function Header() {
         </Link>
       </div>
       <div>
-        {!tokens ? defaultLinks : role === ADMIN ? adminLinks : userLinks}
+          {!tokens ? defaultLinks : role === roles.admin ? adminLinks : userLinks}
       </div>
     </div>
   );

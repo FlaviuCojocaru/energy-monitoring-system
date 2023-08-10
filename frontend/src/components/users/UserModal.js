@@ -1,31 +1,24 @@
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {
-  createUser,
-  reset,
-  selectUsersInfo,
-} from "../../features/users/usersSlice";
-import { FAILED, IDLE, LOADING, SUCCEEDED } from "../../utils/status";
+import { createUser } from "../../features/users/usersSlice";
 import { ReactComponent as CloseIcon } from "../../images/close-icon.svg";
+import { capitalize } from "../../utils/utils";
+import { roles } from "../../utils/roles";
 import "../../styles/modal.css";
 import "../../styles/button.css";
 
 function UserModal({ isOpen, onClose }) {
   const dispatch = useDispatch();
-  const { users, status, message } = useSelector(selectUsersInfo);
-  const roles = { client: "Client", admin: "Administrator" };
 
   const [isClient, setIsClient] = useState(true);
-  const [isCreated, setIsCreated] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     email: "",
     firstName: "",
     lastName: "",
-    role: "Administrator",
+    role: capitalize(roles.admin),
     consumerNumber: "",
   });
 
@@ -46,31 +39,12 @@ function UserModal({ isOpen, onClose }) {
       email: "",
       firstName: "",
       lastName: "",
-      role: "Administrator",
+      role: capitalize(roles.admin),
       consumerNumber: "",
     });
 
-  // display a message if a change is detected or reset the states
   useEffect(() => {
-    if (status === FAILED) {
-      const keys = Object.keys(message);
-      for (let i = 0; i < keys.length; i++) {
-        toast.error(`${keys[i]}: ${message[keys[i]][0]}`);
-      }
-    }
-
-    if (status === SUCCEEDED && isCreated) {
-      toast.success("User created successfully");
-      setIsCreated(false);
-    }
-
-    if (status !== IDLE && status !== LOADING) {
-      dispatch(reset());
-    }
-  }, [users, status, message, dispatch]);
-
-  useEffect(() => {
-    setIsClient(role === roles.client);
+    setIsClient(role === capitalize(roles.client));
   }, [role]);
 
   const handleChange = (e) => {
@@ -92,12 +66,11 @@ function UserModal({ isOpen, onClose }) {
       role,
     };
 
-    if (role === roles.client) {
+    if (role === capitalize(roles.client)) {
       userData = { ...userData, consumer_number: consumerNumber };
     }
 
     dispatch(createUser(userData));
-    setIsCreated(true);
     onClose(); // close the modal
     clearForm(); // clear the form
   };

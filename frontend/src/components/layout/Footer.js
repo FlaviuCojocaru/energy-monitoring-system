@@ -7,11 +7,11 @@ const Footer = () => {
       <div className="footer-content">
         <p>Copyright &copy; 2023 All Rights reserved.</p>
         <p>
-          <a target="_blank" rel="noreferrer" href="https://inciteinc.com/">
+          <a target="_blank" rel="noreferrer" href="https://westworld.fandom.com/wiki/Incite_Inc.">
             AN INCITE COMPANY &trade;
           </a>
           |
-          <a target="_blank" rel="noreferrer" href="https://delosincorporated.com/">
+          <a target="_blank" rel="noreferrer" href="https://westworld.fandom.com/wiki/Delos_Incorporated">
             &copy; DELOS INC
           </a>
         </p>
