@@ -1,20 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-
-import {
-  deleteUser,
-  selectUsersInfo,
-  reset,
-} from "../../features/users/usersSlice";
 import { ReactComponent as EditIcon } from "../../images/edit-icon.svg";
 import { ReactComponent as RemoveIcon } from "../../images/remove-icon.svg";
-import { selectAuthTokens } from "../../features/auth/authSlice";
 import "../../styles/dashboard.css";
 
 function EditRemoveMenu({ row, table, onClose }) {
   const meta = table.options.meta;
   const id = row.original.id;
-  const authTokens = useSelector(selectAuthTokens);
-  const dispatch = useDispatch();
 
   const setEditedRows = () => {
     meta?.setEditedRows((prev) => ({
@@ -23,8 +13,9 @@ function EditRemoveMenu({ row, table, onClose }) {
     }));
   };
 
+  // remove the item from the current row
   const handleRemove = (e) => {
-    dispatch(deleteUser({ userId: id, tokens: authTokens }));
+    meta.removeItem(id);
   };
 
   const handleEnableEdit = (e) => {

@@ -14,6 +14,7 @@ import {
   removeFromStore,
   selectUsersInfo,
   reset,
+  deleteUser,
 } from "../../features/users/usersSlice";
 import { selectAuthTokens } from "../../features/auth/authSlice";
 import UserInfo from "./UserInfo";
@@ -25,6 +26,48 @@ import "../../styles/dashboard.css";
 import "../../styles/table.css";
 import { FAILED, IDLE, LOADING, SUCCEEDED } from "../../utils/status";
 import { toast } from "react-toastify";
+
+// define the columns for the tanstack react-table library
+const columnHelper = createColumnHelper();
+const columns = [
+  columnHelper.display({
+    header: "BASIC INFO",
+    cell: UserInfo,
+  }),
+  columnHelper.accessor("email", {
+    header: "Email",
+    cell: TableCell,
+    meta: {
+      type: "email",
+      placeholder: "Email",
+    },
+  }),
+  columnHelper.accessor("consumer_number", {
+    header: "Consumer Number",
+    cell: TableCell,
+    meta: {
+      type: "sequence",
+    },
+  }),
+  columnHelper.accessor("role", {
+    header: "Role",
+    cell: TableCell,
+    meta: {
+      type: "dropdown",
+      choices: [
+        { value: "Administrator", label: roles.admin, color: "#faffcb" },
+        { value: "Client", label: roles.client, color: "#e4ffc2" },
+      ],
+    },
+  }),
+  columnHelper.accessor("created_date", {
+    header: "Created Date",
+  }),
+  columnHelper.display({
+    id: "edit-actions",
+    cell: EditCell,
+  }),
+];
 
 function UserTable() {
   const { users, editedUsers } = useSelector(selectUsers);
@@ -39,48 +82,6 @@ function UserTable() {
   const [expandedRows, setExpandedRows] = useState({});
   // state that controls which row has the change role modal open
   const [expandedRoles, setExpandedRoles] = useState({});
-
-  // define the columns for the tanstack react-table library
-  const columnHelper = createColumnHelper();
-  const columns = [
-    columnHelper.display({
-      header: "BASIC INFO",
-      cell: UserInfo,
-    }),
-    columnHelper.accessor("email", {
-      header: "Email",
-      cell: TableCell,
-      meta: {
-        type: "email",
-        placeholder: "Email",
-      },
-    }),
-    columnHelper.accessor("consumer_number", {
-      header: "Consumer Number",
-      cell: TableCell,
-      meta: {
-        type: "sequence",
-      },
-    }),
-    columnHelper.accessor("role", {
-      header: "Role",
-      cell: TableCell,
-      meta: {
-        type: "dropdown",
-        choices: [
-          { value: "Administrator", label: roles.admin, color: "#faffcb" },
-          { value: "Client", label: roles.client, color: "#e4ffc2" },
-        ],
-      },
-    }),
-    columnHelper.accessor("created_date", {
-      header: "Created Date",
-    }),
-    columnHelper.display({
-      id: "edit-actions",
-      cell: EditCell,
-    }),
-  ];
 
   // define the table instance
   const table = useReactTable({
@@ -112,17 +113,22 @@ function UserTable() {
       },
 
       // update the user in the database
-      updateUser: (userIndex) => {
-        if (Object.keys(editedUsers[userIndex]).length) {
+      updateItem: (itemIndex) => {
+        if (Object.keys(editedUsers[itemIndex]).length) {
           dispatch(
             updateUser({
-              userId: users[userIndex].id,
-              dataId: userIndex,
-              userData: editedUsers[userIndex],
+              userId: users[itemIndex].id,
+              dataId: itemIndex,
+              userData: editedUsers[itemIndex],
               tokens: authTokens,
             })
           );
         }
+      },
+
+      // remove the user with the given id from the database and update the user state
+      removeItem: (itemId) => {
+        dispatch(deleteUser({ userId: itemId, tokens: authTokens }));
       },
     },
   });

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-function TextCell({ row, column, table }) {
+function NumberCell({ row, column, table }) {
   const tableMeta = table.options.meta;
-  const columnMeta = column.columnDef.meta;
   const id = row.original.id;
 
   // initialize the state
@@ -22,9 +21,9 @@ function TextCell({ row, column, table }) {
   // cell in edit mode
   if (tableMeta?.editedRows[id]) {
     return (
-      <input className="text-cell"
-        value={state.value}
-        placeholder={columnMeta?.placeholder}
+      <input className="number-cell"
+        type="number"
+        value={state.value || "0"}
         onChange={(e) => setState({value: e.target.value })}
         onBlur={handleOnBlur}
       />
@@ -35,4 +34,4 @@ function TextCell({ row, column, table }) {
   return <span>{currentValue || "N/A"}</span>;
 }
 
-export default TextCell;
+export default NumberCell;

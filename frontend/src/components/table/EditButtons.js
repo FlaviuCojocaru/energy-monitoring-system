@@ -14,7 +14,7 @@ function EditButtons({ row, table }) {
 
   const handleSave = () => {
     setEditedRows(); // close the edit mode
-    meta.updateUser(row.index); // update the user in the db
+    meta.updateItem(row.index); // update the user in the db
   };
 
   const handleCancel = () => {

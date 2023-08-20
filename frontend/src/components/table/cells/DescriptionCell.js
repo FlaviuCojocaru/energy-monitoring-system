@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function TextCell({ row, column, table }) {
+function DescriptionCell({ row, column, table }) {
   const tableMeta = table.options.meta;
   const columnMeta = column.columnDef.meta;
   const id = row.original.id;
@@ -16,23 +16,28 @@ function TextCell({ row, column, table }) {
 
   // Reset the state when the cell is no longer in edit mode
   useEffect(() => {
-    setState({value: currentValue })
+    setState({ value: currentValue });
   }, [tableMeta?.editedRows?.[id], currentValue]);
 
   // cell in edit mode
   if (tableMeta?.editedRows[id]) {
     return (
-      <input className="text-cell"
+      <textarea
+        className="description-cell"
         value={state.value}
         placeholder={columnMeta?.placeholder}
-        onChange={(e) => setState({value: e.target.value })}
+        onChange={(e) => setState({ value: e.target.value })}
         onBlur={handleOnBlur}
       />
     );
   }
 
   // cell in view mode
-  return <span>{currentValue || "N/A"}</span>;
+  return (
+    <span className={currentValue ? "" : "empty-value"}>
+      {currentValue || "N/A"}
+    </span>
+  );
 }
 
-export default TextCell;
+export default DescriptionCell;

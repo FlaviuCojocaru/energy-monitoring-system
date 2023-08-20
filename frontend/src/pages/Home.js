@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
-import HomeSection from "./HomeSection";
 import { Fragment } from "react";
-import { selectAuthTokens } from "../../features/auth/authSlice";
-import UserHomeSection from "./UserHomeSection";
+
+import HomeSection from "../components/home/HomeSection";
+import { selectAuthTokens } from "../features/auth/authSlice";
+import UserHomeSection from "../components/home/UserHomeSection";
 
 function Home() {
   const authTokens = useSelector(selectAuthTokens);

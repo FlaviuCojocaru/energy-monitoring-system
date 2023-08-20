@@ -1,9 +1,4 @@
-import Home from "./components/home/Home";
-import Login from "./components/authentication/Login";
-import Register from "./components/authentication/Register";
-import RootLayoout from "./components/layout/RootLayout";
-import NotFound from "./components/layout/NotFound";
-import store from "./app/store";
+
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,9 +10,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import store from "./app/store";
 import { Fragment } from "react";
 import AdminRoute from "./components/utils/AdminRoute";
-import UserManagementDashboard from "./components/users/UserManagementDashboard";
+import RootLayoout from "./components/layout/RootLayout";
+import NotFound from "./components/layout/NotFound";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import UserManagement from "./pages/UserManagement";
+import DeviceManagement from "./pages/DeviceManagement";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +31,8 @@ const router = createBrowserRouter(
 
       {/* private routes for the admin users */}
       <Route path="/" element={<AdminRoute />}>
-        <Route path="/users" element={<UserManagementDashboard />} />
+        <Route path="/users" element={<UserManagement />} />
+        <Route path="/devices" element={<DeviceManagement />} />
       </Route>
 
     </Route>

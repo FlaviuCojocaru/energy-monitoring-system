@@ -51,7 +51,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 120px;
+  gap: 10px;
+  white-space: nowrap;
   margin-left: 20px;
 }
 

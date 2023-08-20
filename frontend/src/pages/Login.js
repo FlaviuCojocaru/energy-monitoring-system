@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { login, reset, selectAuthInfo } from "../../features/auth/authSlice";
-import "../../styles/authentication.css";
-import { SUCCEEDED, FAILED, IDLE, LOADING } from "../../utils/status";
+import { login, reset, selectAuthInfo } from "../features/auth/authSlice";
+import "../styles/authentication.css";
+import { SUCCEEDED, FAILED, IDLE, LOADING } from "../utils/status";
 
 function Login() {
   const [formData, setFormData] = useState({

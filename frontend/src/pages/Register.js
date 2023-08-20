@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import "../../styles/authentication.css";
+import "../styles/authentication.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register, reset, selectAuthInfo } from "../../features/auth/authSlice";
-import { FAILED, IDLE, LOADING, SUCCEEDED } from "../../utils/status";
+import { register, reset, selectAuthInfo } from "../features/auth/authSlice";
+import { FAILED, IDLE, LOADING, SUCCEEDED } from "../utils/status";
 import { toast } from "react-toastify";
 
 const Register = () => {
