@@ -14,15 +14,13 @@ class UserListCreateView(APIView):
     def get(self, request, *args, **kwargs):
         queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(data=serializer.data)
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
-        print(request.method)
         serializer = CreateUserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

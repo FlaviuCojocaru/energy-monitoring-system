@@ -4,7 +4,7 @@ from .models import Client, Role, User
 
 
 class BaseUserSerializer(serializers.Serializer):
-    
+
     id = serializers.IntegerField(read_only=True)
     role = serializers.CharField(max_length=15)
     username = serializers.CharField(max_length=150)
@@ -12,6 +12,7 @@ class BaseUserSerializer(serializers.Serializer):
     first_name = serializers.CharField(max_length=150, required=False)
     last_name = serializers.CharField(max_length=150, required=False)
     consumer_number = serializers.CharField(max_length=10, required=False)
+    created_date = serializers.DateTimeField(read_only=True, source="date_joined", format="%Y-%m-%d")
 
     # validators
     def validate_role(self, value):
@@ -22,7 +23,7 @@ class BaseUserSerializer(serializers.Serializer):
             if role[0] == value.upper():
                 return value
         raise serializers.ValidationError(f"{value} is not a valid role.")
-    
+
     def validate_username(self, value):
         """
         Check if the username is unique in the database
@@ -31,7 +32,7 @@ class BaseUserSerializer(serializers.Serializer):
         if qs.exists():
             raise serializers.ValidationError(f"{value} username already exists.")
         return value
-    
+
     def validate_consumer_number(self, value):
         """
         Check if the consumer_number is unique in the database
@@ -40,16 +41,29 @@ class BaseUserSerializer(serializers.Serializer):
         if qs.exists():
             raise serializers.ValidationError(f'{value} consumer number already exists.')
         return value
-    
+
     def validate(self, data):
         """
         Check if the role is set to Client.
         """
-        if data['role'].upper() == Role.CLIENT:
+        if data.get('role', '').upper() == Role.CLIENT:
             consumer_number = data.get("consumer_number", None)
             if not consumer_number:
                 raise serializers.ValidationError(f'client must have a consumer number.')
         return data
+
+    # customize user representation
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        if instance.is_admin():
+            representation.pop('consumer_number', None)
+
+        if instance.is_client():
+            representation['consumer_number'] = Client.objects.get(
+                user=instance).consumer_number
+
+        return representation
 
 
 class UserSerializer(BaseUserSerializer):
@@ -86,18 +100,6 @@ class UserSerializer(BaseUserSerializer):
             client_instance.save()
         return instance
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-
-        if instance.is_admin():
-            representation.pop('consumer_number', None)
-
-        if instance.is_client():
-            representation['consumer_number'] = Client.objects.get(
-                user=instance).consumer_number
-
-        return representation
-
 
 class CreateUserSerializer(BaseUserSerializer):
 
@@ -108,22 +110,26 @@ class CreateUserSerializer(BaseUserSerializer):
         role_name = validated_data.pop("role", None)
         consumer_number = validated_data.pop('consumer_number', None)
 
-        role = Role.objects.get(name=role_name.upper())  # get the role instance from the db
+        # get the role instance from the db
+        role = Role.objects.get(name=role_name.upper())
         instance = User(**validated_data)  # create the user instance
         instance.role = role  # assign the role to the user
 
-        if password: instance.set_password(password) # hash the password
-        
+        if password:
+            instance.set_password(password)  # hash the password
+
         instance.save()  # save the user in the database
-        
+
         if role_name.upper() == Role.CLIENT:
             # if the value for 'role' is "CLIENT"
             # create also a client instance for the user
-            client_instance = Client(user=instance, consumer_number=consumer_number)
+            client_instance = Client(
+                user=instance, consumer_number=consumer_number)
             client_instance.save()  # save the client instance in the db
 
         return instance
-    
+
+
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):

@@ -11,6 +11,7 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class DeviceSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
     client = serializers.CharField(max_length=150)
     address = AddressSerializer()
     description = serializers.CharField(max_length=500, required=False)
@@ -51,7 +52,7 @@ class DeviceSerializer(serializers.Serializer):
 
         instance = Device(**validated_data)
         instance.save()
-        return Device()
+        return instance
 
     def update(self, instance, validated_data):
         """
