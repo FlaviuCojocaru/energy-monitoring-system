@@ -4,29 +4,29 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import TableCell from "../table/cells/TableCell";
-import {
-  reset,
-  selectDevices,
-  selectDevicesInfo,
-  deleteDevice,
-  updateDevice,
-  updateStore,
-  removeFromStore,
-} from "../../features/devices/deviceSlice";
-import { selectAuthTokens } from "../../features/auth/authSlice";
 import EditCell from "../table/cells/EditCell";
+import { selectAuthTokens } from "../../features/auth/authSlice";
+import {
+  deleteSensor,
+  removeFromStore,
+  selectSensors,
+  selectSensorsInfo,
+  updateSensor,
+  updateStore,
+} from "../../features/sensor/sensorSlice";
 import { FAILED, IDLE, LOADING, SUCCEEDED } from "../../utils/status";
 import { actions } from "../../utils/actions";
+import { reset } from "../../features/users/usersSlice";
 
 const columnHelper = createColumnHelper();
 const columns = [
-  columnHelper.accessor("client", {
-    header: "Client",
+  columnHelper.accessor("device", {
+    header: "Device ID",
     cell: TableCell,
     meta: {
       placeholder: "Client",
@@ -40,16 +40,8 @@ const columns = [
       placeholder: "Device description",
     },
   }),
-  columnHelper.display({
-    header: "Address",
-    id: "address",
-    cell: TableCell,
-    meta: {
-      type: "address",
-    },
-  }),
-  columnHelper.accessor("max_energy_consumption", {
-    header: "Max Energy Consumption",
+  columnHelper.accessor("max_value", {
+    header: "Max. Value",
     cell: TableCell,
     meta: {
       type: "number",
@@ -61,13 +53,11 @@ const columns = [
   }),
 ];
 
-// + address
-
-function DeviceTable() {
-  const { devices, editedDevices } = useSelector(selectDevices);
+function SensorTable() {
   const dispatch = useDispatch();
+  const { sensors, editedSensors } = useSelector(selectSensors);
   const authTokens = useSelector(selectAuthTokens);
-  const { status, message, action } = useSelector(selectDevicesInfo);
+  const { status, message, action } = useSelector(selectSensorsInfo);
 
   // states
   // state that controls which row is in edit mode
@@ -78,7 +68,7 @@ function DeviceTable() {
   const [expandedRoles, setExpandedRoles] = useState({});
 
   const table = useReactTable({
-    data: devices,
+    data: sensors,
     columns,
     getCoreRowModel: getCoreRowModel(),
     meta: {
@@ -89,10 +79,10 @@ function DeviceTable() {
       expandedRoles, // state that controls which row has the change role modal open
       setExpandedRoles,
 
-      // update the user state in the redux store
+      // update the sensor state in the redux store
       updateStore: (rowIndex, columnName, value) => {
-        const originalValue = devices[rowIndex][columnName];
-        const editedValue = editedDevices[rowIndex][columnName];
+        const originalValue = sensors[rowIndex][columnName];
+        const editedValue = editedSensors[rowIndex][columnName];
 
         if (originalValue !== value) {
           // data is different from the original value
@@ -105,24 +95,23 @@ function DeviceTable() {
         }
       },
 
-      // update the device in the database
+      // update the sensor in the database
       updateItem: (itemIndex) => {
-        if (Object.keys(editedDevices[itemIndex]).length) {
+        if (Object.keys(editedSensors[itemIndex]).length) {
           dispatch(
-            updateDevice({
-              deviceId: devices[itemIndex].id,
+            updateSensor({
+              sensorId: sensors[itemIndex].id,
               dataId: itemIndex,
-              deviceData: {...devices[itemIndex], ...editedDevices[itemIndex]},
+              sensorData: editedSensors[itemIndex],
               tokens: authTokens,
             })
           );
         }
       },
 
-      // remove the device with the given id from the database and update the device state
+      // remove the user with the given id from the database and update the user state
       removeItem: (itemId) => {
-        console.log("remove Device");
-        dispatch(deleteDevice({ deviceId: itemId, tokens: authTokens }));
+        dispatch(deleteSensor({ sensorId: itemId, tokens: authTokens }));
       },
     },
   });
@@ -143,25 +132,25 @@ function DeviceTable() {
 
     // success mesages
     if (status === SUCCEEDED && action === actions.create) {
-      toast.success("Device created successfully");
+      toast.success("Sensor created successfully");
     }
 
     if (status === SUCCEEDED && action === actions.delete) {
-      toast.success("Device deleted successfully");
+      toast.success("Sensor deleted successfully");
     }
 
-    // if (status === SUCCEEDED && action === actions.update) {
-    //   toast.success("User updated successfully");
-    // }
+    if (status === SUCCEEDED && action === actions.update) {
+      toast.success("Sensor updated successfully");
+    }
 
     if (status !== IDLE && status !== LOADING) {
       dispatch(reset());
     }
-  }, [devices, status, message, dispatch]);
+  }, [sensors, status, message, dispatch]);
 
   // construct the table using react-table library
-  return devices ? (
-    <table className="content-table table-center">
+  return sensors ? (
+    <table className="content-table">
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
@@ -191,8 +180,6 @@ function DeviceTable() {
   ) : (
     <></>
   );
-
-  return <></>;
 }
 
-export default DeviceTable;
+export default SensorTable;

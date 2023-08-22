@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserManagement from "./pages/UserManagement";
 import DeviceManagement from "./pages/DeviceManagement";
+import SensorManagement from "./pages/SensorManagement";
 
 
 const router = createBrowserRouter(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<AdminRoute />}>
         <Route path="/users" element={<UserManagement />} />
         <Route path="/devices" element={<DeviceManagement />} />
+        <Route path="/sensors" element={<SensorManagement />} />
       </Route>
 
     </Route>

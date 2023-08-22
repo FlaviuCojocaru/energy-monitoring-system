@@ -76,14 +76,14 @@ export const deviceSlice = createSlice({
       state.message = "";
       state.action = "";
     },
-    // update the state with the user's change
+    // update the state with the device's change
     updateStore: (state, action) => {
       const data = action.payload;
       if (data.value) {
         state.editedDevices[data.rowIndex][data.columnName] = data.value;
       }
     },
-    // remove the user's change from the state
+    // remove the devices's change from the state
     removeFromStore: (state, action) => {
       const data = action.payload;
       delete state.editedDevices[data.rowIndex][data.columnName];

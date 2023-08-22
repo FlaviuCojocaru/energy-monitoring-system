@@ -14,7 +14,6 @@ function DeviceManagement() {
   const { devices } = useSelector(selectDevices);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // TODO: ore mege si fara useeffect?
   useEffect(() => {
     dispatch(getDevices(authTokens));
   }, []);
