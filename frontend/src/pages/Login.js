@@ -7,19 +7,23 @@ import { toast } from "react-toastify";
 import { login, reset, selectAuthInfo } from "../features/auth/authSlice";
 import "../styles/authentication.css";
 import { SUCCEEDED, FAILED, IDLE, LOADING } from "../utils/status";
+import { setActiveLink } from "../features/header/headerSlice";
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
   const { username, password } = formData;
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const { authTokens, role, status, message } = useSelector(selectAuthInfo);
+
+  useEffect(() => {
+    dispatch(setActiveLink("login"));
+  }, []);
 
   useEffect(() => {
     if (status === FAILED) {

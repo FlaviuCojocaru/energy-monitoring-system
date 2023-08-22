@@ -7,6 +7,7 @@ import SensorModal from "../components/sensor/SensorModal";
 import { getSensors, selectSensors } from "../features/sensor/sensorSlice";
 import { selectAuthTokens } from "../features/auth/authSlice";
 import SensorTable from "../components/sensor/SensorTable";
+import { setActiveLink } from "../features/header/headerSlice";
 
 function SensorManagement() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function SensorManagement() {
 
   useEffect(() => {
     dispatch(getSensors(authTokens));
+    dispatch(setActiveLink("sensors"));
   }, []);
 
   return (

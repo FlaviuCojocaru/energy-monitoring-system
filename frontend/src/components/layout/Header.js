@@ -13,8 +13,11 @@ import { ReactComponent as DevicesIcon } from "../../images/devices-icon.svg";
 import { ReactComponent as UsersIcon } from "../../images/users-icon.svg";
 import { ReactComponent as SensorsIcon } from "../../images/sensors-icon.svg";
 import { ReactComponent as LogoutIcon } from "../../images/logout-icon.svg";
-import {roles} from "../../utils/roles";
+import { roles } from "../../utils/roles";
 import "../../styles/header.css";
+import CustomLink from "../utils/CustomLink";
+import { reset as resetLinkSelection, setActiveLink } from "../../features/header/headerSlice";
+
 
 function Header() {
   const tokens = useSelector(selectAuthTokens);
@@ -24,18 +27,21 @@ function Header() {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
+    dispatch(resetLinkSelection());
   };
 
   const defaultLinks = (
     <nav>
       <ul className="nav-items">
         <li className="header-link">
-          <RegisterIcon className="header-icon" />
-          <Link to={"/register"}>Register</Link>
+          <CustomLink
+            text="Register"
+            path={"/register"}
+            linkIcon={RegisterIcon}
+          />
         </li>
         <li className="header-link">
-          <LoginIcon className="header-icon" />
-          <Link to={"/login"}>Login</Link>
+          <CustomLink text="Login" path={"/login"} linkIcon={LoginIcon} />
         </li>
       </ul>
     </nav>
@@ -54,18 +60,30 @@ function Header() {
 
   const adminLinks = (
     <ul className="nav-items">
-      <li className="header-link">
-        <UsersIcon className="header-icon" />
-        <Link to={"/users"}>Users</Link>
+      <li className="nav-item">
+        <CustomLink
+          text="Users"
+          path={"/users"}
+          linkIcon={UsersIcon}
+        />
       </li>
-      <li className="header-link">
-        <DevicesIcon className="header-icon" />
-        <Link to={"/devices"}>Devices</Link>
+
+      <li className="nav-item">
+        <CustomLink
+          text="Devices"
+          path={"/devices"}
+          linkIcon={DevicesIcon}
+        />
       </li>
-      <li className="header-link">
-        <SensorsIcon className="header-icon" />
-        <Link to={"/sensors"}>Sensors</Link>
+
+      <li className="nav-item">
+        <CustomLink
+          text="Sensors"
+          path={"/sensors"}
+          linkIcon={SensorsIcon}
+        />
       </li>
+
       <li className="header-btn">
         <button onClick={onLogout}>
           <LogoutIcon className="header-icon" />
@@ -83,7 +101,7 @@ function Header() {
         </Link>
       </div>
       <div>
-          {!tokens ? defaultLinks : role === roles.admin ? adminLinks : userLinks}
+        {!tokens ? defaultLinks : role === roles.admin ? adminLinks : userLinks}
       </div>
     </div>
   );

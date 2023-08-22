@@ -7,15 +7,18 @@ import { selectAuthTokens } from "../features/auth/authSlice";
 import { getUsers, selectUsers } from "../features/users/usersSlice";
 import UserModal from "../components/user/UserModal";
 import { ReactComponent as AddUserIcon } from "../images/add-user-icon.svg";
+import { setActiveLink } from "../features/header/headerSlice";
 
 function UserManagement() {
   const { users } = useSelector(selectUsers);
   const dispatch = useDispatch();
+
   const authTokens = useSelector(selectAuthTokens);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getUsers(authTokens));
+    dispatch(setActiveLink("users"));
   }, []);
 
   return (

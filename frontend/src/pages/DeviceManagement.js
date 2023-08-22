@@ -7,6 +7,7 @@ import DashboardInfo from "../components/dashboard/DashboardInfo";
 import { ReactComponent as AddDeviceIcon } from "../images/add-device-icon.svg";
 import DeviceTable from "../components/device/DeviceTable";
 import DeviceModal from "../components/device/DeviceModal";
+import { setActiveLink } from "../features/header/headerSlice";
 
 function DeviceManagement() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function DeviceManagement() {
 
   useEffect(() => {
     dispatch(getDevices(authTokens));
+    dispatch(setActiveLink("devices"));
   }, []);
 
   return (

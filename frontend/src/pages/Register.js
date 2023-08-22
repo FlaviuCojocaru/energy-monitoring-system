@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, reset, selectAuthInfo } from "../features/auth/authSlice";
 import { FAILED, IDLE, LOADING, SUCCEEDED } from "../utils/status";
 import { toast } from "react-toastify";
+import { setActiveLink } from "../features/header/headerSlice";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,14 +19,21 @@ const Register = () => {
     lastName: "",
     consumerNumber: "",
   });
-
-  const { username, password, email, firstName, lastName, consumerNumber } =
-    formData;
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  
+  const { 
+    username,
+    password, 
+    email, 
+    firstName, 
+    lastName, 
+    consumerNumber 
+  } = formData;
 
   const { authTokens, status, message } = useSelector(selectAuthInfo);
+
+  useEffect(() => {
+    dispatch(setActiveLink("register"));
+  }, []);
 
   useEffect(() => {
     if (status === FAILED) {
