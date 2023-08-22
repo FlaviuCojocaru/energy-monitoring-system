@@ -150,9 +150,9 @@ function DeviceTable() {
       toast.success("Device deleted successfully");
     }
 
-    // if (status === SUCCEEDED && action === actions.update) {
-    //   toast.success("User updated successfully");
-    // }
+    if (status === SUCCEEDED && action === actions.update) {
+      toast.success("Device updated successfully");
+    }
 
     if (status !== IDLE && status !== LOADING) {
       dispatch(reset());
