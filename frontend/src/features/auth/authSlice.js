@@ -9,6 +9,7 @@ const authTokens = JSON.parse(localStorage.getItem("authTokens"));
 const initialState = {
   authTokens: authTokens ? authTokens : null,
   role: authTokens ? jwt_decode(authTokens.access).role : null,
+  currentUser: authTokens ? jwt_decode(authTokens.access).username : null,
   status: IDLE,
   message: "",
 };
@@ -70,6 +71,7 @@ export const authSlice = createSlice({
         state.status = SUCCEEDED;
         state.authTokens = action.payload;
         state.role = jwt_decode(action.payload.access).role;
+        state.currentUser = jwt_decode(action.payload.access).username;
       })
       .addCase(login.rejected, (state, action) => {
         state.status = FAILED;
@@ -87,6 +89,8 @@ export const authSlice = createSlice({
         state.status = SUCCEEDED;
         state.authTokens = action.payload;
         state.role = jwt_decode(action.payload.access).role;
+        state.currentUser = jwt_decode(action.payload.access).username;
+
       })
       .addCase(register.rejected, (state, action) => {
         state.status = FAILED;
@@ -98,6 +102,7 @@ export const authSlice = createSlice({
 
 export const selectAuthTokens = (state) => state.auth.authTokens;
 export const selectAuthRole = (state) => state.auth.role;
+export const selectAuthUser = (state) => state.auth.currentUser;
 export const selectAuthInfo = (state) => state.auth;
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;

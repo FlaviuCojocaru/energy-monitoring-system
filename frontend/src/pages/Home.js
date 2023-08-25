@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
 
-import HomeSection from "../components/home/HomeSection";
+import HomePage from "./HomePage";
 import { selectAuthTokens } from "../features/auth/authSlice";
-import UserHomeSection from "../components/home/UserHomeSection";
-import { reset, setActiveLink } from "../features/header/headerSlice";
+import { reset } from "../features/header/headerSlice";
+import UserHomePage from "./UserHomePage";
 
 function Home() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function Home() {
   dispatch(reset());
   
   return (
-    <Fragment>{authTokens ? <UserHomeSection /> : <HomeSection />}</Fragment>
+    <Fragment>{authTokens ? <UserHomePage /> : <HomePage />}</Fragment>
   );
 }
 

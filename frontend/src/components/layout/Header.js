@@ -9,6 +9,7 @@ import {
 import { ReactComponent as Logo } from "../../images/logo.svg";
 import { ReactComponent as LoginIcon } from "../../images/login-icon.svg";
 import { ReactComponent as RegisterIcon } from "../../images/register-icon.svg";
+import { ReactComponent as HomeIcon } from "../../images/home-icon.svg";
 import { ReactComponent as DevicesIcon } from "../../images/devices-icon.svg";
 import { ReactComponent as UsersIcon } from "../../images/users-icon.svg";
 import { ReactComponent as SensorsIcon } from "../../images/sensors-icon.svg";
@@ -60,6 +61,14 @@ function Header() {
 
   const adminLinks = (
     <ul className="nav-items">
+      <li className="nav-item">
+        <CustomLink
+          text="Home"
+          path={"/"}
+          linkIcon={HomeIcon}
+        />
+      </li>
+
       <li className="nav-item">
         <CustomLink
           text="Users"

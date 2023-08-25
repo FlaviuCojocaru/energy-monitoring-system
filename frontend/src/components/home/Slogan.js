@@ -13,7 +13,7 @@ function Slogan() {
         <p className="second-row">{second_row}</p>
         <button onClick={() => navigate("/register")}>Register Now</button>
       </div>
-      <Background className="background-image" />
+      <Background className="slogan-image" />
     </div>
   );
 }

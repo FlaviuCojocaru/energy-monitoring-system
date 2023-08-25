@@ -1,38 +1,41 @@
+/* slogan section */
+
 .slogan-section {
   padding-top: 65px;
-  height: 600px;
+  height: 500px;
   background: none;
   display: flex;
   justify-content: space-evenly;
   background-color: #f3f3f3;
+  /* background-color: #e8e8e8; */
 }
 
-.background-image {
+.slogan-image {
   scale: 75%;
 }
 
-.slogan-text{
+.slogan-text {
   align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.first-row {
+.slogan-text .first-row {
   margin: 0px;
   font-size: 40px;
   font-weight: 700;
   margin: auto;
 }
 
-.second-row {
+.slogan-text .second-row {
   margin: 0px;
   font-size: 35px;
   font-style: italic;
   width: 400;
 }
 
-.slogan-section .slogan-text button{
+.slogan-section button {
   margin-top: 20px;
   margin-right: 13px;
   width: 30%;
@@ -47,9 +50,10 @@
 }
 
 .slogan-section .slogan-text button:hover {
-  /* border: 5px solid #28282b; */
   opacity: 0.7;
 }
+
+/* feature section */
 
 .feature-section {
   padding-top: 10%;
@@ -59,7 +63,7 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  margin-bottom: 20%;
+  margin-bottom: 100px;
 }
 
 .question {
@@ -76,26 +80,25 @@
 .feature-items {
   list-style: none;
   display: flex;
-  align-items: top;
-  justify-content: space-between;
-  margin-left: 20%;
-  margin-right: 20%;
+  gap: 50px;
 }
 
 .feature-items li {
   width: 340px;
   height: 430px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   border: 3px solid #f3f3f3;
   border-radius: 100px;
   text-align: center;
   transition: border-color color fill 0.15s;
   margin: 0px 35px;
   padding: 0px 2px;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .feature-items li h1 {
@@ -103,16 +106,16 @@
   margin: 15 0px;
 }
 
-.feature-items li:hover{
-  color:#6aba2f;
+.feature-items li:hover {
+  color: #6aba2f;
   border-color: #69ba2f9d;
 }
 
-.feature-items li:hover > .icon path{
+.feature-items li:hover > .icon path {
   fill: #6aba2f;
 }
 
-.feature-items li:hover > .icon rect{
+.feature-items li:hover > .icon rect {
   fill: #6aba2f;
 }
 
@@ -120,6 +123,107 @@
   height: 100px;
   margin-bottom: 35px;
 }
+
+/*****************************************/
+
+.userpage-section {
+  /* background-color: #e8e8e8; */
+  padding-top: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  padding-left: 10%; /* din dashboard.css */
+  padding-right: 10%; /* din dashboard.css */
+}
+.lightgray{
+  background-color: #f3f3f3;
+}
+
+.white{
+  background-color: white;
+}
+
+.welcome-text {
+  font-size: 35px;
+  font-weight: 400;
+  text-align: center;
+  color: #28272b;
+}
+
+.welcome-text span {
+  color: #6aba2f;
+}
+
+.welcome-text p {
+  color: #aeaeae;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.userpage-description h2{
+  margin: 0;
+  margin-bottom: 10px;
+  color: #28272b;
+  
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.userpage-description p{
+  margin: 0;
+  margin-bottom: 30px;
+  color: #28272b;
+
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.userpage-description a{
+  text-decoration: none;
+  color: #28272b;
+}
+
+.userpage-image {
+  height: 450px;
+}
+
+/* .profile-section{
+  border-right: 2px solid#f3f3f3;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+}
+
+.profile-section .profile-icon{
+  margin-top: 50px;
+  width: 200px;
+  height: 200px;
+}
+
+.profile-section .name{
+  font-size: 20pt;
+  margin-top: 30px;
+}
+
+.profile-section .username{
+  color: rgb(135, 135, 135);
+  font-size: 17pt;
+}
+
+.home-content{
+  background-color: blanchedalmond;
+  flex: 3;
+}
+
+.user-home-background{
+  width: 512px;
+} */
 
 /* @media (max-width: 750px) {
   .question {
