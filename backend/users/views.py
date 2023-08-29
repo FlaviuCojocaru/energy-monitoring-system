@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .serializers import UserSerializer, CreateUserSerializer, CustomTokenObtainPairSerializer
 from .models import User
-from .permissions import IsAdminOrCreateOnly
+from .permissions import IsAdminOrCreateOnly, IsAdminOrOwner
 
 
 class UserListCreateView(APIView):
@@ -25,6 +25,8 @@ class UserListCreateView(APIView):
 
 
 class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAdminOrOwner]
+    
     serializer_class = UserSerializer
     queryset = User.objects.all()
     lookup_field = 'pk'

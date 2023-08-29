@@ -7,7 +7,8 @@ from rest_framework import status
 from .serializers import DeviceSerializer
 from .models import Device
 from users.models import Client
-from users.permissions import IsAdminUser, IsAdminOrReadOnly
+from users.permissions import IsAdminOrReadOnly, IsAdminOrOwner
+
 
 
 class DeviceListCreateView(APIView):
@@ -36,7 +37,7 @@ class DeviceListCreateView(APIView):
 
 
 class DeviceRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+    permission_classes = [IsAdminOrOwner]
     serializer_class = DeviceSerializer
     queryset = Device.objects.all()
     lookup_field = 'pk'

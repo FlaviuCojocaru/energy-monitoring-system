@@ -17,7 +17,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        if request.method == 'GET':
+        if request.method == "GET":
             return True
 
         return request.user.role.name == Role.ADMINISTRATOR
@@ -29,7 +29,22 @@ class IsAdminOrCreateOnly(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        if request.method == 'POST':
+        if request.method == "POST":
             return True
 
         return request.user.role.name == Role.ADMINISTRATOR
+
+
+class IsAdminOrOwner(permissions.BasePermission):
+    """
+    Permission class that allows all requests made by an admin user and only requests made by the owner of the object.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if request.user.role.name == Role.ADMINISTRATOR:
+            return True
+
+        if getattr(obj, "client", None):
+            return obj.client.user == request.user
+
+        return False
