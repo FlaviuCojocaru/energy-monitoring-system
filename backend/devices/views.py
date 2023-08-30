@@ -37,7 +37,7 @@ class DeviceListCreateView(APIView):
 
 
 class DeviceRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAdminOrOwner]
+    permission_classes = [IsAuthenticated, IsAdminOrOwner]
     serializer_class = DeviceSerializer
     queryset = Device.objects.all()
     lookup_field = 'pk'

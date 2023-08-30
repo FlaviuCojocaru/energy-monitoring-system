@@ -14,6 +14,7 @@ class DeviceSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     client = serializers.CharField(max_length=150)
     address = AddressSerializer()
+    name = serializers.CharField(max_length=100)
     description = serializers.CharField(max_length=500, required=False)
     max_energy_consumption = serializers.FloatField()
 

@@ -17,6 +17,7 @@ class Address(models.Model):
 class Device(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
     description = models.CharField(max_length=500, blank=True)
     max_energy_consumption = models.FloatField()
 
