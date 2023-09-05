@@ -1,3 +1,4 @@
+from datetime import datetime
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 
@@ -25,6 +26,12 @@ class MeasurementListCreateView(generics.ListCreateAPIView):
         """
         Return a queryset containing all measurements belonging to the authenticated client.
         """
-        sensor = self.kwargs["sensor_id"]
-        measurements = Measurement.objects.filter(sensor=sensor)
+        device = self.kwargs["device_id"]
+        
+        date_string =self.request.query_params.get('date')
+        format = "%Y-%m-%d"
+        date = datetime.strptime(date_string, format)
+                
+        sensor = Sensor.objects.filter(device=device)
+        measurements = Measurement.objects.filter(sensor__in=sensor, date__date=date)
         return measurements

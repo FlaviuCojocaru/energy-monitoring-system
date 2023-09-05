@@ -1,0 +1,9 @@
+# message queue configuration
+QUEUE_NAME: test_queue2
+AMQP_URL: amqps://adzjuewb:vivV8xr1KlREvxRgefyEDsljsc6BpOZV@sparrow.rmq.cloudamqp.com/adzjuewb
+
+# simulation configuration
+measurements_file: ./measurements.csv
+start_days_ago: 8
+measurement_interval: 10  
+wait_interval: 0

@@ -9,6 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
+  color: #28272b;
 }
 
 html {
@@ -16,8 +17,9 @@ html {
   min-height: 100vh;
   position: relative;
   width: 100%;
+  color: #28272b;
 }
 
 .padding{
-  padding-bottom: 170px;
+  padding-bottom: 140px;
 }

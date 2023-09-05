@@ -13,12 +13,14 @@ import { ReactComponent as HomeIcon } from "../../images/home-icon.svg";
 import { ReactComponent as DevicesIcon } from "../../images/devices-icon.svg";
 import { ReactComponent as UsersIcon } from "../../images/users-icon.svg";
 import { ReactComponent as SensorsIcon } from "../../images/sensors-icon.svg";
+import { ReactComponent as EnConsumptionIcon } from "../../images/en-consumption-icon.svg";
 import { ReactComponent as LogoutIcon } from "../../images/logout-icon.svg";
 import { roles } from "../../utils/roles";
 import "../../styles/header.css";
 import CustomLink from "../utils/CustomLink";
-import { reset as resetLinkSelection, setActiveLink } from "../../features/header/headerSlice";
-
+import {
+  reset as resetNavSelection,
+} from "../../features/nav/navSlice";
 
 function Header() {
   const tokens = useSelector(selectAuthTokens);
@@ -28,7 +30,7 @@ function Header() {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    dispatch(resetLinkSelection());
+    dispatch(resetNavSelection());
   };
 
   const defaultLinks = (
@@ -50,6 +52,23 @@ function Header() {
 
   const userLinks = (
     <ul className="nav-items">
+      <li className="nav-item">
+        <CustomLink text="Home" path={"/"} linkIcon={HomeIcon} />
+      </li>
+      <li className="nav-item">
+        <CustomLink
+          text="My devices"
+          path={"/my-devices"}
+          linkIcon={DevicesIcon}
+        />
+      </li>
+      <li className="nav-item">
+        <CustomLink
+          text="En. consumption"
+          path={"/en-consumption"}
+          linkIcon={EnConsumptionIcon}
+        />
+      </li>
       <li className="header-btn">
         <button onClick={onLogout}>
           <LogoutIcon className="header-icon" />
@@ -62,35 +81,19 @@ function Header() {
   const adminLinks = (
     <ul className="nav-items">
       <li className="nav-item">
-        <CustomLink
-          text="Home"
-          path={"/"}
-          linkIcon={HomeIcon}
-        />
+        <CustomLink text="Home" path={"/"} linkIcon={HomeIcon} />
       </li>
 
       <li className="nav-item">
-        <CustomLink
-          text="Users"
-          path={"/users"}
-          linkIcon={UsersIcon}
-        />
+        <CustomLink text="Users" path={"/users"} linkIcon={UsersIcon} />
       </li>
 
       <li className="nav-item">
-        <CustomLink
-          text="Devices"
-          path={"/devices"}
-          linkIcon={DevicesIcon}
-        />
+        <CustomLink text="Devices" path={"/devices"} linkIcon={DevicesIcon} />
       </li>
 
       <li className="nav-item">
-        <CustomLink
-          text="Sensors"
-          path={"/sensors"}
-          linkIcon={SensorsIcon}
-        />
+        <CustomLink text="Sensors" path={"/sensors"} linkIcon={SensorsIcon} />
       </li>
 
       <li className="header-btn">

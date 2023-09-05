@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { login, reset, selectAuthInfo } from "../features/auth/authSlice";
 import "../styles/authentication.css";
 import { SUCCEEDED, FAILED, IDLE, LOADING } from "../utils/status";
-import { setActiveLink } from "../features/header/headerSlice";
+import { setActiveLink } from "../features/nav/navSlice";
 
 function Login() {
   const navigate = useNavigate();
@@ -58,44 +58,47 @@ function Login() {
   };
 
   return (
-    <div className="container-auth">
-      <div className="auth-form login">
-        <h1>Login</h1>
-        <form onSubmit={onSubmit}>
-          <div className="auth-item">
-            <input
-              type="text"
-              required
-              placeholder=" "
-              name="username"
-              value={username}
-              onChange={onChange}
-            ></input>
-            <span></span>
-            <label>Username</label>
-          </div>
+    <Fragment>
+      <div className="container-auth">
+        <div className="auth-form login">
+          <h1>Login</h1>
+          <form onSubmit={onSubmit}>
+            <div className="auth-item">
+              <input
+                type="text"
+                required
+                placeholder=" "
+                name="username"
+                value={username}
+                onChange={onChange}
+              ></input>
+              <span></span>
+              <label>Username</label>
+            </div>
 
-          <div className="auth-item">
-            <input
-              type="password"
-              required
-              placeholder=" "
-              name="password"
-              value={password}
-              onChange={onChange}
-            ></input>
-            <span></span>
-            <label>Password</label>
-          </div>
+            <div className="auth-item">
+              <input
+                type="password"
+                required
+                placeholder=" "
+                name="password"
+                value={password}
+                onChange={onChange}
+              ></input>
+              <span></span>
+              <label>Password</label>
+            </div>
 
-          <button type="submit">Login</button>
+            <button type="submit">Login</button>
 
-          <div className="redirect-link">
-            Don't have an account? <Link to={"/register"}>Register</Link>
-          </div>
-        </form>
+            <div className="redirect-link">
+              Don't have an account? <Link to={"/register"}>Register</Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+      <div className="padding"></div>
+    </Fragment>
   );
 }
 

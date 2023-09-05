@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import "../../styles/header.css";
-import { selectActiveLink } from "../../features/header/headerSlice";
+import { selectActiveLink } from "../../features/nav/navSlice";
 
 function CustomLink({ text, path, linkIcon: LinkIcon }) {
   const activeLink = useSelector(selectActiveLink);

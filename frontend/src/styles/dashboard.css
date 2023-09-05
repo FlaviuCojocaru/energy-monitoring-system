@@ -1,40 +1,35 @@
-.dashboard-info {
+.dashboard {
   margin-top: 100px;
-  /* margin-left: 450px;
-  margin-right: 450px; */
-  margin-left: 23%; /* de vazut aici */
-  margin-right: 23%; /* de vazut aici */
-  min-width: 900px; /* de vazut */
+  margin-left: 20%;
+  margin-right: 20%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  padding-bottom: 50%;
 }
 
-.dashboard-info .top {
+.dashboard .top {
   margin-bottom: 50px;
 }
 
-.dashboard-info .top div {
+.dashboard .top div {
   display: flex;
   align-items: center;
 }
 
-.dashboard-info .top h1 {
+.dashboard .top h1 {
   font-size: 30px;
   font-weight: 700;
 }
 
-.dashboard-info .top span {
+.dashboard .top span {
   font-size: 17px;
   font-weight: 400;
   color: rgb(146, 146, 146);
   margin-left: 25px;
 }
 
-.dashboard-info .dashboard-btn {
+.dashboard .dashboard-btn {
   padding: 10px 10px 10px 10px;
 
   background-color: #28272b;
@@ -47,7 +42,7 @@
   transition: opacity 0.25s;
 }
 
-.dashboard-info .bottom .add-btn {
+.dashboard .bottom .add-btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,44 +51,282 @@
   margin-left: 20px;
 }
 
-.dashboard-info .dashboard-btn .btn-icon {
+.dashboard .dashboard-btn .btn-icon {
   height: 20px;
   width: 20px;
   margin: 0;
 }
 
-.dashboard-info .dashboard-btn:hover {
+.dashboard .dashboard-btn:hover {
   opacity: 0.8;
 }
 
-.dashboard-info .bottom {
+.dashboard .bottom {
   display: flex;
   justify-content: center;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.dashboard-info input {
+.dashboard input,
+.dashboard select {
   height: 40px;
   width: 80%;
+
+  font-size: 15px;
+  background-color: white;
   border: 1px solid #dbd9d9;
   border-radius: 3px;
-  font-size: 15px;
+
   margin-right: 20px;
   padding-left: 10px;
 }
 
-.dashboard-info input::placeholder {
+.dashboard input::placeholder {
   color: rgb(175, 175, 175);
   font-size: 15px;
 }
 
-.dashboard-info input:focus {
+.dashboard input:focus,
+.dashboard select:focus {
   outline: none;
   font-size: 15px;
 }
 
-.dashboard-info .bottom .search-btn {
+.dashboard .bottom .search-btn {
   padding: 0px 20px;
   border-radius: 5px;
+}
+
+/* client device dashboard */
+
+.my-devices-title {
+  margin-top: 150px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.my-devices-title .home-icon {
+  height: 50px;
+  width: 50px;
+}
+
+.my-devices-title span {
+  color: #28272b;
+  font-size: 35px;
+}
+
+.my-devices-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 100px;
+}
+
+.device-card {
+  flex: 1 0 30%;
+
+  padding: 25px 0;
+  max-width: 30%;
+  background-color: #f3f3f3;
+
+  border: 2px solid #dbd9d9;
+  border-radius: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.device-card img {
+  height: 200px;
+  width: 400px;
+  object-fit: cover;
+}
+
+.device-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+
+  font-size: 17px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  min-height: 230px;
+  flex-wrap: wrap;
+}
+
+.device-card-body .device-name {
+  margin-top: 30px;
+  align-self: center;
+}
+
+.device-card-body h1 {
+  font-size: 35px;
+  font-weight: 500;
+  align-self: center;
+
+  cursor: pointer;
+}
+
+.device-card-body h1:hover {
+  text-decoration: underline;
+}
+
+.device-card-body .device-description {
+  display: flex;
+  align-items: center;
+}
+
+.device-card span,
+.en-consumption-header span {
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background-color: #e4ffc2; /*faffcb*/
+
+  margin-right: 10px;
+}
+
+.device-card-body textarea {
+  padding: 5px;
+  font-family: initial;
+  width: 250px;
+  height: 70px;
+  font-size: 17px;
+
+  border: 1px solid #dbd9d9;
+  border-radius: 5px;
+
+  resize: none;
+  outline: none;
+}
+
+.device-card-body input {
+  height: 30px;
+
+  border: 1px solid #dbd9d9;
+  border-radius: 3px;
+
+  font-size: 17px;
+  margin-right: 5px;
+  padding-left: 10px;
+}
+
+.device-card-body input::placeholder {
+  color: rgb(175, 175, 175);
+  font-size: 17px;
+}
+
+.device-card-body input:focus {
+  outline: none;
+  font-size: 17px;
+}
+
+.device-consumption input {
+  width: 78px;
+}
+
+.device-consumption input {
+  width: 78px;
+}
+
+.device-card-footer {
+  font-size: 17px;
+  color: rgb(126, 126, 126);
+  margin-top: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.device-card button {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+
+  margin-top: 40px;
+  background-color: #28272b;
+  border: 1px solid #28272b;
+  border-radius: 7px;
+
+  cursor: pointer;
+}
+
+.device-card button span {
+  color: #f3f3f3;
+  background-color: #28272b;
+  font-size: 17px;
+}
+
+.device-card .edit-icon {
+  padding-left: 5px;
+  height: 20px;
+  width: 20px;
+}
+
+.edit-btns {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
+
+  margin-top: 40px;
+}
+
+.edit-btns .cancel-icon {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.edit-btns .save-icon {
+  height: 37px;
+  width: 37px;
+  cursor: pointer;
+}
+
+/* client en consumption dashboard */
+
+.en-consumption {
+  padding-top: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.en-consumption-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 50%;
+}
+
+.en-consumption-header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.en-consumption-header span {
+  font-size: 17px;
 }

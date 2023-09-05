@@ -124,10 +124,9 @@
   margin-bottom: 35px;
 }
 
-/*****************************************/
+/* admin homepage */
 
 .userpage-section {
-  /* background-color: #e8e8e8; */
   padding-top: 80px;
 
   display: flex;
@@ -135,14 +134,15 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 
-  padding-left: 10%; /* din dashboard.css */
-  padding-right: 10%; /* din dashboard.css */
+  padding-left: 10%; 
+  padding-right: 10%;
 }
-.lightgray{
+
+.lightgray {
   background-color: #f3f3f3;
 }
 
-.white{
+.white {
   background-color: white;
 }
 
@@ -163,16 +163,16 @@
   font-weight: 400;
 }
 
-.userpage-description h2{
+.userpage-description h2 {
   margin: 0;
   margin-bottom: 10px;
   color: #28272b;
-  
+
   font-size: 30px;
   font-weight: 400;
 }
 
-.userpage-description p{
+.userpage-description p {
   margin: 0;
   margin-bottom: 30px;
   color: #28272b;
@@ -181,7 +181,7 @@
   font-weight: 400;
 }
 
-.userpage-description a{
+.userpage-description a {
   text-decoration: none;
   color: #28272b;
 }
@@ -190,73 +190,35 @@
   height: 450px;
 }
 
-/* .profile-section{
-  border-right: 2px solid#f3f3f3;
-  flex: 1;
+/* client homepage v2 */
+.client-userpage-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 5%;
+  padding-right: 5%;
+  justify-content: space-around;
+}
 
+.client-userpage-section .left-section {
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
 }
 
-.profile-section .profile-icon{
-  margin-top: 50px;
-  width: 200px;
-  height: 200px;
+.client-userpage-section a {
+  font-size: 23px;
+  text-decoration: none;
+  color: #28272b;
+
+  background-color: #e1f4d3;
+  padding: 5px;
+  margin-top: 100px;
+
+  border: 2px solid #e1f4d3;
+  border-radius: 7px;
 }
 
-.profile-section .name{
-  font-size: 20pt;
-  margin-top: 30px;
+.client-userpage-image {
+  height: 700px;
 }
-
-.profile-section .username{
-  color: rgb(135, 135, 135);
-  font-size: 17pt;
-}
-
-.home-content{
-  background-color: blanchedalmond;
-  flex: 3;
-}
-
-.user-home-background{
-  width: 512px;
-} */
-
-/* @media (max-width: 750px) {
-  .question {
-    margin-bottom: 30px;
-    font-size: 45px;
-    font-weight: 700;
-  }
-
-  .feature-items {
-    flex-direction: column;
-  }
-
-  .feature-items li {
-    width: 285px;
-    height: 345px;
-    margin: 10px 35px;
-  }
-
-  .feature-items li h1 {
-    font-size: 25px;
-  }
-
-  .icon {
-    height: 50px;
-    margin-bottom: 20px;
-  }
-} */
-
-/* @media screen and (min-width: 2000px) {
-  .feature-items li {
-    width: 350px;
-    height: 450px;
-    margin: 0px 75px;
-    padding: 0px 10px;
-  }
-} */

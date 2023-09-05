@@ -35,10 +35,23 @@ const register = async (userData) => {
   return response.data;
 };
 
+// get logged in user
+const getUser = async (userId, authTokens) => {
+  const url = `${BASE_URL}/users/${userId}`;
+  const response = await axios.get(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authTokens.access}`,
+    },
+  });
+  return response.data;
+};
+
 const authService = {
   login,
   logout,
   register,
+  getUser,
 };
 
 export default authService;

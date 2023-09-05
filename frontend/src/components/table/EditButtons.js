@@ -1,5 +1,5 @@
-import { ReactComponent as CancelButtons } from "../../images/cancel-icon.svg";
-import { ReactComponent as SaveButtons } from "../../images/save-icon.svg";
+import { ReactComponent as CancelButton } from "../../images/cancel-icon.svg";
+import { ReactComponent as SaveButton } from "../../images/save-icon.svg";
 
 function EditButtons({ row, table }) {
   const meta = table.options.meta;
@@ -23,8 +23,8 @@ function EditButtons({ row, table }) {
 
   return (
     <div className="edit-cell">
-      <CancelButtons className="cancel-icon" onClick={handleCancel} />
-      <SaveButtons className="save-icon" onClick={handleSave} />
+      <CancelButton className="cancel-icon" onClick={handleCancel} />
+      <SaveButton className="save-icon" onClick={handleSave} />
     </div>
   );
 }

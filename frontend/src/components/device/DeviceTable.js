@@ -32,6 +32,13 @@ const columns = [
       placeholder: "Client",
     },
   }),
+  columnHelper.accessor("name", {
+    header: "Name",
+    cell: TableCell,
+    meta: {
+      placeholder: "Name",
+    },
+  }),
   columnHelper.accessor("description", {
     header: "Description",
     cell: TableCell,

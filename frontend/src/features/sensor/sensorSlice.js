@@ -7,6 +7,7 @@ import sensorService from "./sensorService";
 const initialState = {
   sensors: [],
   editedSensors: [],
+  measurements: [],
   status: IDLE,
   message: "",
   action: "",
@@ -68,6 +69,20 @@ export const updateSensor = createAsyncThunk(
   }
 );
 
+// get sensor's data
+export const getSensorData = createAsyncThunk(
+  "sensor/getSensorData",
+  async ({deviceId, date}, thunkAPI) => {
+    try {
+      return await sensorService.getSensorData(deviceId, date);
+    } catch (error) {
+      const DefaultMessage = { message: ["Oops! Something went wrong!"] };
+      const message = error.response.data || DefaultMessage;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const sensorSlice = createSlice({
   name: "sensors",
   initialState,
@@ -77,8 +92,8 @@ export const sensorSlice = createSlice({
       state.message = "";
       state.action = "";
     },
-     // update the state with the sensor's change
-     updateStore: (state, action) => {
+    // update the state with the sensor's change
+    updateStore: (state, action) => {
       const data = action.payload;
       if (data.value) {
         state.editedSensors[data.rowIndex][data.columnName] = data.value;
@@ -131,9 +146,11 @@ export const sensorSlice = createSlice({
         state.status = SUCCEEDED;
         state.action = actions.delete;
         state.sensors = state.sensors.filter(
-          (sensor) => sensor.id !== deletedSensorId);
+          (sensor) => sensor.id !== deletedSensorId
+        );
         state.editedSensors = state.editedSensors.filter(
-          (sensor) => sensor.id !== deletedSensorId);
+          (sensor) => sensor.id !== deletedSensorId
+        );
       })
       .addCase(deleteSensor.rejected, (state, action) => {
         state.status = FAILED;
@@ -145,7 +162,6 @@ export const sensorSlice = createSlice({
       })
       .addCase(updateSensor.fulfilled, (state, action) => {
         const updatedSensorId = action.meta.arg.dataId;
-        const updatedAttributes = action.meta.arg.sensorData;
 
         state.status = SUCCEEDED; // update the status
         state.action = actions.update;
@@ -161,6 +177,18 @@ export const sensorSlice = createSlice({
         state.action = actions.update;
         state.message = action.payload;
         state.editedSensors[action.meta.arg.dataId] = {}; // reset the state
+      })
+      .addCase(getSensorData.pending, (state) => {
+        state.status = LOADING;
+      })
+      .addCase(getSensorData.fulfilled, (state, action) => {
+        state.status = SUCCEEDED;
+        state.measurements = action.payload;
+      })
+      .addCase(getSensorData.rejected, (state, action) => {
+        state.status = FAILED;
+        state.message = action.payload;
+        state.measurements = [];
       });
   },
 });
@@ -168,6 +196,7 @@ export const sensorSlice = createSlice({
 export const { reset, updateStore, removeFromStore } = sensorSlice.actions;
 export default sensorSlice.reducer;
 export const selectSensorsInfo = (state) => state.sensors;
+export const selectMeasurements = (state) => state.sensors.measurements;
 export const selectSensors = (state) => ({
   sensors: state.sensors.sensors,
   editedSensors: state.sensors.editedSensors,

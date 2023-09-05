@@ -6,6 +6,7 @@ import { actions } from "../../utils/actions";
 const initialState = {
   devices: [],
   editedDevices: [],
+  selectedDevice: "",
   status: IDLE,
   message: "",
   action: "",
@@ -88,6 +89,11 @@ export const deviceSlice = createSlice({
       const data = action.payload;
       delete state.editedDevices[data.rowIndex][data.columnName];
     },
+    // set the selected device
+    setSelectedDevice: (state, action) => {
+      const data = action.payload;
+      state.selectedDevice = data;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -129,7 +135,9 @@ export const deviceSlice = createSlice({
 
         state.status = SUCCEEDED;
         state.action = actions.delete;
-        state.devices = state.devices.filter((device) => device.id !== deletedDeviceId        );
+        state.devices = state.devices.filter(
+          (device) => device.id !== deletedDeviceId
+        );
         state.editedDevices = state.editedDevices.filter(
           (device) => device.id !== deletedDeviceId
         );
@@ -144,7 +152,6 @@ export const deviceSlice = createSlice({
       })
       .addCase(updateDevice.fulfilled, (state, action) => {
         const updatedDeviceId = action.meta.arg.dataId;
-        const updatedAttributes = action.meta.arg.deviceData;
 
         state.status = SUCCEEDED; // update the status
         state.action = actions.update;
@@ -164,9 +171,10 @@ export const deviceSlice = createSlice({
   },
 });
 
-export const { reset, updateStore, removeFromStore } = deviceSlice.actions;
+export const { reset, updateStore, removeFromStore, setSelectedDevice } = deviceSlice.actions;
 export default deviceSlice.reducer;
 export const selectDevicesInfo = (state) => state.devices;
+export const selectSelectedDevice = (state) => state.devices.selectedDevice;
 export const selectDevices = (state) => ({
   devices: state.devices.devices,
   editedDevices: state.devices.editedDevices,

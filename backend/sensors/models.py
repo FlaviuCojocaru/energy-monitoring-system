@@ -10,4 +10,4 @@ class Sensor(models.Model):
 class Measurement(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     value = models.FloatField()
-    timestamp = models.DateTimeField()
+    date = models.DateTimeField()

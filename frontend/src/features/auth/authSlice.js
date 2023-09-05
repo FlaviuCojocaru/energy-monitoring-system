@@ -9,7 +9,8 @@ const authTokens = JSON.parse(localStorage.getItem("authTokens"));
 const initialState = {
   authTokens: authTokens ? authTokens : null,
   role: authTokens ? jwt_decode(authTokens.access).role : null,
-  currentUser: authTokens ? jwt_decode(authTokens.access).username : null,
+  currentUserId: authTokens ? jwt_decode(authTokens.access).user_id : null,
+  currentUser: null,
   status: IDLE,
   message: "",
 };
@@ -53,6 +54,19 @@ export const register = createAsyncThunk(
   }
 );
 
+// get logged in user
+export const getUser = createAsyncThunk(
+  "auth/getUser",
+  async ({ userId, authTokens }, thunkAPI) => {
+    try {
+      return await authService.getUser(userId, authTokens);
+    } catch (error) {
+      const message = { message: ["Oops! Something went wrong!"] };
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -71,7 +85,7 @@ export const authSlice = createSlice({
         state.status = SUCCEEDED;
         state.authTokens = action.payload;
         state.role = jwt_decode(action.payload.access).role;
-        state.currentUser = jwt_decode(action.payload.access).username;
+        state.currentUserId = jwt_decode(action.payload.access).user_id;
       })
       .addCase(login.rejected, (state, action) => {
         state.status = FAILED;
@@ -89,13 +103,24 @@ export const authSlice = createSlice({
         state.status = SUCCEEDED;
         state.authTokens = action.payload;
         state.role = jwt_decode(action.payload.access).role;
-        state.currentUser = jwt_decode(action.payload.access).username;
-
+        state.currentUserId = jwt_decode(action.payload.access).user_id;
       })
       .addCase(register.rejected, (state, action) => {
         state.status = FAILED;
         state.message = action.payload;
         state.authTokens = null;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.status = LOADING;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.status = SUCCEEDED;
+        state.currentUser = action.payload;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.status = FAILED;
+        state.currentUser = null;
+        state.message = action.payload;
       });
   },
 });
@@ -103,6 +128,7 @@ export const authSlice = createSlice({
 export const selectAuthTokens = (state) => state.auth.authTokens;
 export const selectAuthRole = (state) => state.auth.role;
 export const selectAuthUser = (state) => state.auth.currentUser;
+export const selectAuthId = (state) => state.auth.currentUserId;
 export const selectAuthInfo = (state) => state.auth;
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;

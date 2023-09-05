@@ -1,4 +1,5 @@
 import { useRouteError } from "react-router-dom";
+import { ReactComponent as Image } from "../../images/no-data.svg";
 import "../../styles/not_found.css"
 
 export default function NotFound() {
@@ -12,6 +13,7 @@ export default function NotFound() {
       <p id="error-type">
         {error.statusText || error.message}
       </p>
+    <Image className="image-not-found" />
     </div>
   );
 }
